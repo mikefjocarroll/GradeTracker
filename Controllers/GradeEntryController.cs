@@ -158,7 +158,7 @@ namespace gradeTracker.Controllers
 				AveragePercentage = grades.Count > 0 ? grades.Average(c => c.Percentage) : 0
 			};
 
-			ViewBag.Average = summary.AveragePercentage;
+			ViewBag.Average = Math.Round(summary.AveragePercentage, 2);
 
             return View();
         }
