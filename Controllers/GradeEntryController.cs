@@ -148,6 +148,20 @@ namespace gradeTracker.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+		public async Task<IActionResult> Summary()
+		{
+			var grades = await _context.GradeEntries.ToListAsync();
+
+			var summary = new
+			{
+				AveragePercentage = grades.Count > 0 ? grades.Average(c => c.Percentage) : 0
+			};
+
+			ViewBag.Average = summary.AveragePercentage;
+
+            return View();
+        }
         
         private bool GradeEntryExists(int id)
         {
